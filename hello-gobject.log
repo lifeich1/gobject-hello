@@ -1,3 +1,4 @@
 Enter hello main
+root(0): greet
 Exit hello main
 PASS hello-gobject (exit status: 0)

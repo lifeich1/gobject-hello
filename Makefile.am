@@ -5,5 +5,7 @@ bin_PROGRAMS = hello-gobject
 TESTS = hello-gobject
 
 hello_gobject_SOURCES = src/main.c \
-						src/hello-root.c
+						src/hello-root.c \
+						src/hello-person.c
+
 hello_gobject_LDADD = $(GLIB_LIBS)

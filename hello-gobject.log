@@ -1,5 +1,5 @@
-Enter hello main
-root(0): greet
-root(1): greet
-Exit hello main
-PASS hello-gobject (exit status: 0)
+
+(process:145408): GLib-GObject-WARNING **: 15:09:55.867: invalid class cast from 'HelloPerson' to 'HelloRoot'
+
+(process:145408): GLib-CRITICAL **: 15:09:55.867: g_string_assign: assertion 'string != NULL' failed
+FAIL hello-gobject (exit status: 139)

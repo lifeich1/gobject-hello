@@ -1,5 +1,6 @@
 #include "hello-person.h"
 #include <glib.h>
+#include <stdio.h>
 
 struct _HelloPerson
 {
@@ -36,13 +37,20 @@ hello_root__greet(HelloRoot * super)
 static void
 hello_person__dispose(GObject * gobject)
 {
-    // TODO
+    printf("- hello_person__dispose %p\n", gobject);
+
     G_OBJECT_CLASS (hello_person_parent_class)->dispose(gobject);
 }
 static void
 hello_person__finalize(GObject * gobject)
 {
-    // TODO
+    HelloPerson * self = HELLO_PERSON (gobject);
+
+    printf("- hello_person__finalize %p\n", gobject);
+
+    g_string_free(self->name, TRUE);
+    g_string_free(self->gender, TRUE);
+
     G_OBJECT_CLASS (hello_person_parent_class)->finalize(gobject);
 }
 
@@ -55,7 +63,12 @@ hello_person__set_property(GObject *gobject,
     HelloPerson * self = HELLO_PERSON (gobject);
     
     switch (property_id) {
-        // TODO
+        case PROP_NAME:
+            g_string_assign(self->name, g_value_get_string(value));
+            break;
+        case PROP_GENDER:
+            g_string_assign(self->gender, g_value_get_string(value));
+            break;
         default:
             G_OBJECT_WARN_INVALID_PROPERTY_ID (gobject, property_id, pspec);
             break;
@@ -70,7 +83,12 @@ hello_person__get_property(GObject *gobject,
     HelloPerson * self = HELLO_PERSON (gobject);
     
     switch (property_id) {
-        // TODO
+        case PROP_NAME:
+            g_value_set_string(value, self->name->str);
+            break;
+        case PROP_GENDER:
+            g_value_set_string(value, self->gender->str);
+            break;
         default:
             G_OBJECT_WARN_INVALID_PROPERTY_ID (gobject, property_id, pspec);
             break;
@@ -103,7 +121,7 @@ hello_person_class_init(HelloPersonClass * klass)
                 "Gender",
                 "Person's gender.",
                 "N/A", // default
-                G_PARAM_CONSTRUCT_ONLY | G_PARAM_READWRITE);
+                G_PARAM_READWRITE);
 
     g_object_class_install_properties(obj_klass,
             N_PROPERTIES,
@@ -113,4 +131,19 @@ hello_person_class_init(HelloPersonClass * klass)
 static void
 hello_person_init(HelloPerson * self)
 {
+    printf("- hello_person_init %p\n", self);
+}
+
+HelloPerson * hello_person_new(const char * name)
+{
+    HelloPerson * self;
+
+    self = g_object_new(HELLO_TYPE_PERSON, "name", name, NULL);
+
+    return self;
+}
+
+const char * hello_person_name(HelloPerson * self)
+{
+    return self->name->str;
 }

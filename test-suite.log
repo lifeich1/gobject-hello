@@ -3,12 +3,21 @@
 =========================================
 
 # TOTAL: 1
-# PASS:  1
+# PASS:  0
 # SKIP:  0
 # XFAIL: 0
-# FAIL:  0
+# FAIL:  1
 # XPASS: 0
 # ERROR: 0
 
 .. contents:: :depth: 2
+
+FAIL: hello-gobject
+===================
+
+
+(process:145408): GLib-GObject-WARNING **: 15:09:55.867: invalid class cast from 'HelloPerson' to 'HelloRoot'
+
+(process:145408): GLib-CRITICAL **: 15:09:55.867: g_string_assign: assertion 'string != NULL' failed
+FAIL hello-gobject (exit status: 139)
 

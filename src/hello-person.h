@@ -1,6 +1,7 @@
 #pragma once
 
 #include <glib-object.h>
+#include "hello-root.h"
 
 G_BEGIN_DECLS
 
